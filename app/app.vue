@@ -3,7 +3,7 @@
 <template>
   <UApp>
     <Header />
-    <UMain class="bg-red-700">hello world</UMain>
+    <UMain>hello world</UMain>
     <Footer />
   </UApp>
 </template>
