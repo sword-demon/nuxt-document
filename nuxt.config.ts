@@ -13,6 +13,10 @@ export default defineNuxtConfig({
     }
   ],
 
+  pages: {
+    pattern: ['**/*.vue', '!**/components/**']
+  },
+
   devtools: {
     enabled: true
   },
