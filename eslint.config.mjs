@@ -2,8 +2,10 @@
 import withNuxt from './.nuxt/eslint.config.mjs'
 
 export default withNuxt(
-  // Your custom configs here
-  rules: {
-    'multi-word-component-names': 'off'
+  {
+    rules: {
+      'vue/multi-word-component-names': 'off',
+      'vue/singleline-html-element-content-newline': 'off'
+    }
   }
 )

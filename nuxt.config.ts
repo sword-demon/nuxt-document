@@ -2,6 +2,10 @@
 export default defineNuxtConfig({
   modules: ['@nuxt/eslint', '@nuxt/ui', '@nuxt/fonts'],
 
+  pages: {
+    pattern: ['**/*.vue', '!**/components/**']
+  },
+
   components: [
     {
       path: '~/components'
@@ -12,10 +16,6 @@ export default defineNuxtConfig({
       pathPrefix: true
     }
   ],
-
-  pages: {
-    pattern: ['**/*.vue', '!**/components/**']
-  },
 
   devtools: {
     enabled: true

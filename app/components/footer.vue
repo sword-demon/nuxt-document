@@ -25,7 +25,10 @@ const items: NavigationMenuItem[] = [
         </p>
       </template>
 
-      <UNavigationMenu :items="items" variant="link" />
+      <UNavigationMenu
+        :items="items"
+        variant="link"
+      />
 
       <template #right>
         <UButton
@@ -34,7 +37,8 @@ const items: NavigationMenuItem[] = [
           variant="ghost"
           to="https://github.com/nuxt/nuxt"
           target="_blank"
-          aria-label="GitHub" />
+          aria-label="GitHub"
+        />
       </template>
     </UFooter>
   </div>

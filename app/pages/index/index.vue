@@ -4,6 +4,11 @@
 </script>
 
 <!-- 组件的自动加载 -->
-<template><IndexComponentsHero /> <IndexComponentsSection /></template>
+<template>
+  <main>
+    <IndexComponentsHero />
+    <IndexComponentsSection />
+  </main>
+</template>
 
 <style scoped></style>

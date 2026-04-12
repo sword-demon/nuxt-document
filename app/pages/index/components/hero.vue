@@ -24,10 +24,12 @@ const links = ref<ButtonProps[]>([
     description="A Nuxt/Vue-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications."
     headline="New release"
     orientation="horizontal"
-    :links="links">
+    :links="links"
+  >
     <img
       src="/image4.png"
       alt="App screenshot"
-      class="rounded-lg shadow-2xl ring ring-default" />
+      class="rounded-lg shadow-2xl ring ring-default"
+    >
   </UPageHero>
 </template>
