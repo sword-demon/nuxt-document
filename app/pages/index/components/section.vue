@@ -28,9 +28,18 @@ const features = ref<PageFeatureProps[]>([
 </script>
 
 <template>
-  <UPageSection
-    title="Beautiful Vue UI components"
-    description="Nuxt UI provides a comprehensive suite of components and utilities to help you build beautiful and accessible web applications with Vue and Nuxt."
-    :features="features"
-  />
+  <UPageSection :features="features" />
 </template>
+
+<style scoped>
+@reference '~/assets/css/main.css'
+
+:deep([data-slot='container']) {
+  @apply pt-0! bg-red-100;
+}
+:deep([data-slot='features']) {
+  li {
+    @apply bg-gray-100 px-5 py-3 rounded-lg;
+  }
+}
+</style>
