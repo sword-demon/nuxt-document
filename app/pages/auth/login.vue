@@ -6,12 +6,13 @@ const toast = useToast()
 
 const fields: AuthFormField[] = [
   {
-    name: 'email',
-    type: 'email',
+    name: 'name',
+    type: 'text',
     label: '账号',
     placeholder: '请输入登录账号',
     required: true,
-    size: 'xl'
+    size: 'xl',
+    defaultValue: 'admin'
   },
   {
     name: 'password',
@@ -19,23 +20,34 @@ const fields: AuthFormField[] = [
     type: 'password',
     placeholder: '请输入密码',
     required: true,
-    size: 'xl'
+    size: 'xl',
+    defaultValue: 'admin888'
   }
 ]
 
+// zod yup adonis 验证
 const schema = z.object({
-  email: z.email('请输入正确的账号'),
-  password: z.string('请输入登录密码').min(8, '密码不能少于 8 个字符')
+  name: z.string('请输入登录账号').min(3, '账号不能少于 3 个字符'),
+  password: z.string('请输入登录密码').min(6, '密码不能少于 8 个字符')
 })
 
 type Schema = z.output<typeof schema>
 
-function onSubmit(payload: FormSubmitEvent<Schema>) {
-  console.log('Submitted', payload)
-  toast.add({
-    title: '登录成功',
-    color: 'success'
+// 新用户 7 天内登录一直有效
+const token = useCookie('token', { maxAge: 60 * 60 * 24 * 7 })
+
+async function onSubmit(payload: FormSubmitEvent<Schema>) {
+  const res = await $fetch<any>('http://localhost:3333/auth/login', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: payload.data
   })
+
+  // console.log(res.data)
+  // 如果是会话浏览器关掉之后就失效了
+  token.value = res.data.token.token
 }
 </script>
 
