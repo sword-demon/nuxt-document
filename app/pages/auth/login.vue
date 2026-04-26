@@ -56,6 +56,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
       // 设置 token
     },
     // 响应拦截器
+    // eslint-disable-next-line @stylistic/arrow-parens
     onResponse: res => {
       // console.log('响应处理')
       console.log('onResponse: ', res)
@@ -69,6 +70,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
         title: '网络连接错误'
       })
     },
+    // eslint-disable-next-line @stylistic/arrow-parens
     onResponseError: err => {
       console.log('onResponseError', err)
     }
