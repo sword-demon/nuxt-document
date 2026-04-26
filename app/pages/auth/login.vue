@@ -56,8 +56,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
       // 设置 token
     },
     // 响应拦截器
-    // eslint-disable-next-line @stylistic/arrow-parens
-    onResponse: res => {
+    onResponse: (res) => {
       // console.log('响应处理')
       console.log('onResponse: ', res)
       if (res.response.ok) {
@@ -70,8 +69,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
         title: '网络连接错误'
       })
     },
-    // eslint-disable-next-line @stylistic/arrow-parens
-    onResponseError: err => {
+    onResponseError: (err) => {
       console.log('onResponseError', err)
     }
   })
@@ -92,18 +90,21 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
         icon="i-lucide-user"
         :fields="fields"
         :submit="{ label: '登录', size: 'xl' }"
-        @submit="onSubmit">
+        @submit="onSubmit"
+      >
         <template #footer>
           如果您还没有账号，请先
           <ULink
             to="/auth/register"
             class="text-primary font-medium"
-            >注册
+          >
+            注册
           </ULink>
           <ULink
             to="/"
             class="text-primary font-medium"
-            >首页
+          >
+            首页
           </ULink>
         </template>
       </UAuthForm>

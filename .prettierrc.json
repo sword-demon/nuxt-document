@@ -2,9 +2,9 @@
   "singleQuote": true,
   "jsxSingleQuote": true,
   "semi": false,
-  "arrowParens": "avoid",
+  "arrowParens": "always",
   "tabWidth": 2,
   "trailingComma": "none",
-  "bracketSameLine": true,
+  "bracketSameLine": false,
   "singleAttributePerLine": true
 }
