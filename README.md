@@ -1,6 +1,6 @@
 # nuxt-document
 
-一个基于 `Nuxt 4` 和 `Nuxt UI` 的文档站/展示页骨架项目，当前已经搭建了首页、全局布局、页头页脚、主题色和基础工程化配置，适合作为文档站、产品介绍页或内容站的起点。
+一个基于 `Nuxt 4` 和 `Nuxt UI` 的文档站/展示页项目，当前已搭建首页、文档页、登录/注册页、全局布局、页头页脚、主题色和基础工程化配置，适合作为文档站、产品介绍页或内容站的起点。
 
 ## 项目概览
 
@@ -11,8 +11,8 @@
 | 样式 | Tailwind CSS 4 + `@nuxt/ui` |
 | 语言 | TypeScript |
 | 代码质量 | ESLint 10 + Nuxt ESLint |
-| 字体/主题 | `@nuxt/fonts` + 自定义主色/中性色 |
-| 页面状态 | 已有首页 Hero + Feature Section + Header/Footer |
+| 字体/主题 | `@nuxt/fonts`(local) + 自定义主色/中性色 + 中文字体 |
+| 页面状态 | 首页 + 文档页 + 登录/注册 + Header/Footer |
 
 ## 当前页面结构
 
@@ -20,9 +20,18 @@
 default layout
 ├─ Header
 ├─ 页面内容
-│  └─ /
-│     ├─ Hero
-│     └─ Section
+│  ├─ /                          首页
+│  │  ├─ Hero
+│  │  └─ Section
+│  ├─ /auth/login                登录页
+│  ├─ /auth/register             注册页
+│  └─ /docs/getting-started      文档页
+│     ├─ index                   入门指南
+│     ├─ theme/design-system     设计系统
+│     └─ integrations/
+│        ├─ color-mode           色彩模式
+│        ├─ fonts                字体
+│        └─ icons                图标
 └─ Footer
 ```
 
@@ -35,11 +44,24 @@ default layout
 │  ├─ app.vue                        # 应用入口
 │  ├─ assets/css/main.css            # Tailwind 与主题变量入口
 │  ├─ components/
+│  │  ├─ docs-page-shell.vue         # 文档页面通用外壳
 │  │  ├─ header.vue                  # 全局页头
 │  │  └─ footer.vue                  # 全局页脚
 │  ├─ layouts/
 │  │  └─ default.vue                 # 默认布局
 │  └─ pages/
+│     ├─ auth/
+│     │  ├─ login.vue                # 登录页
+│     │  └─ register.vue             # 注册页
+│     ├─ docs/
+│     │  └─ getting-started/
+│     │     ├─ index.vue             # 文档入门页
+│     │     ├─ theme/
+│     │     │  └─ design-system.vue  # 设计系统
+│     │     └─ integrations/
+│     │        ├─ color-mode.vue     # 色彩模式
+│     │        ├─ fonts.vue          # 字体
+│     │        └─ icons.vue          # 图标
 │     └─ index/
 │        ├─ index.vue                # 首页入口
 │        └─ components/
@@ -67,16 +89,28 @@ default layout
 - `Hero`：展示标题、说明、CTA 按钮和预览图
 - `Section`：展示能力点卡片
 
-### 3. 默认布局包含统一头尾
+### 3. 文档页面使用统一外壳
+
+- `docs-page-shell.vue`：提供文档页面通用布局（标题、描述、要点卡片）
+- 文档路由：`/docs/getting-started` 及其子页面
+
+### 4. 默认布局包含统一头尾
 
 - `Header`：站点品牌、登录/注册按钮
 - `Footer`：版权、导航菜单、GitHub 按钮
 
-### 4. 主题已做基础定制
+### 5. 认证页面
+
+- `登录页`：`/auth/login`，使用 Zod 表单校验
+- `注册页`：`/auth/register`，使用 Zod 表单校验
+- 使用 `UAuthForm` 组件构建统一风格的认证表单
+
+### 6. 主题已做基础定制
 
 - 主色：`green`
 - 中性色：`slate`
 - 默认无衬线字体：`Public Sans`
+- 中文字体：`Liu Jian Mao Cao`、`ZCOOL QingKe HuangYou`
 
 ## 开发命令
 
@@ -113,10 +147,21 @@ pnpm dev
 - `@nuxt/ui`
 - `@nuxt/fonts`
 
+## 主要依赖
+
+- `nuxt`: ^4.4.2
+- `@nuxt/ui`: ^4.6.0
+- `tailwindcss`: ^4.2.2
+- `zod`: ^4.3.6（表单校验）
+- `@iconify-json/lucide`: ^1.2.100
+- `@iconify-json/simple-icons`: ^1.2.75
+
 ## 后续可继续扩展的方向
 
-- 补充真实文档路由与内容结构
+- 补充真实文档内容与 MDX/Content 支持
 - 替换首页示例文案和示意图
-- 接入鉴权、搜索或内容管理
+- 接入后端鉴权 API，实现真实登录/注册
 - 完善 SEO、站点信息和部署说明
+- 添加搜索功能
+- 接入内容管理系统
 
