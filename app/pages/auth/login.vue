@@ -36,8 +36,16 @@ type Schema = z.output<typeof schema>
 // 新用户 7 天内登录一直有效
 const token = useCookie('token', { maxAge: 60 * 60 * 24 * 7 })
 
+interface LoginResponse {
+  data: {
+    token: {
+      token: string
+    }
+  }
+}
+
 async function onSubmit(payload: FormSubmitEvent<Schema>) {
-  const res = await $fetch<any>('http://localhost:3333/auth/login', {
+  const res = await $fetch<LoginResponse>('http://localhost:3333/auth/login', {
     method: 'POST',
     headers: {
       'content-type': 'application/json'
