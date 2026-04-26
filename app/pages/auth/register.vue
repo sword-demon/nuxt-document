@@ -32,20 +32,25 @@ const fields: AuthFormField[] = [
   }
 ]
 
-const schema = z.object({
-  email: z.email('请输入正确的账号'),
-  password: z.string('请输入注册密码').min(8, '密码不能少于 8 个字符'),
-  password_confirm: z.string('请确认密码').refine((value) => {
-    const password = schema.shape.password
-    return value === password
-  }, '两次输入的密码不一致')
-})
+const schema = z
+  .object({
+    email: z.email('请输入正确的账号'),
+    password: z.string('请输入注册密码').min(8, '密码不能少于 8 个字符'),
+    password_confirm: z.string('请确认密码')
+  })
+  .refine(data => data.password === data.password_confirm, {
+    message: '两次输入的密码不一致',
+    path: ['password_confirm']
+  })
 
 type Schema = z.output<typeof schema>
 
 function onSubmit(payload: FormSubmitEvent<Schema>) {
   console.log('Submitted', payload)
-  toast.success('注册成功')
+  toast.add({
+    title: '注册成功',
+    color: 'success'
+  })
 }
 </script>
 

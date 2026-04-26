@@ -32,7 +32,10 @@ type Schema = z.output<typeof schema>
 
 function onSubmit(payload: FormSubmitEvent<Schema>) {
   console.log('Submitted', payload)
-  toast.success('登录成功')
+  toast.add({
+    title: '登录成功',
+    color: 'success'
+  })
 }
 </script>
 
