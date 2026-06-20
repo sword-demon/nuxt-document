@@ -4,15 +4,15 @@
 
 ## 项目概览
 
-| 维度 | 当前实现 |
-| --- | --- |
-| 框架 | Nuxt 4 |
-| UI | Nuxt UI 4 |
-| 样式 | Tailwind CSS 4 + `@nuxt/ui` |
-| 语言 | TypeScript |
-| 代码质量 | ESLint 10 + Nuxt ESLint |
+| 维度      | 当前实现                                            |
+| --------- | --------------------------------------------------- |
+| 框架      | Nuxt 4                                              |
+| UI        | Nuxt UI 4                                           |
+| 样式      | Tailwind CSS 4 + `@nuxt/ui`                         |
+| 语言      | TypeScript                                          |
+| 代码质量  | ESLint 10 + Nuxt ESLint                             |
 | 字体/主题 | `@nuxt/fonts`(local) + 自定义主色/中性色 + 中文字体 |
-| 页面状态 | 首页 + 文档页 + 登录/注册 + Header/Footer |
+| 页面状态  | 首页 + 文档页 + 登录/注册 + Header/Footer           |
 
 ## 当前页面结构
 
@@ -133,12 +133,12 @@ pnpm dev
 
 ## 工程约定
 
-| 项目 | 约定 |
-| --- | --- |
-| 包管理器 | `pnpm` |
-| 格式化 | `Prettier` |
-| 静态检查 | `ESLint` |
-| 类型检查 | `nuxt typecheck` |
+| 项目         | 约定                           |
+| ------------ | ------------------------------ |
+| 包管理器     | `pnpm`                         |
+| 格式化       | `Prettier`                     |
+| 静态检查     | `ESLint`                       |
+| 类型检查     | `nuxt typecheck`               |
 | 页面组件组织 | 页面目录内可拆分 `components/` |
 
 ## 当前已启用的 Nuxt 模块
@@ -165,3 +165,8 @@ pnpm dev
 - 添加搜索功能
 - 接入内容管理系统
 
+## 自定义插件
+
+```bash
+pnpm next add plugin fetch
+```

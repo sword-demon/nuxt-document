@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import * as z from 'zod'
+import { ref } from 'vue'
 import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
-
-const toast = useToast()
 
 const fields: AuthFormField[] = [
   {
@@ -34,7 +33,13 @@ const schema = z.object({
 type Schema = z.output<typeof schema>
 
 // 新用户 7 天内登录一直有效
+// 响应式数据
 const token = useCookie('token', { maxAge: 60 * 60 * 24 * 7 })
+
+const formData = ref<Schema>({
+  name: '',
+  password: ''
+})
 
 interface LoginResponse {
   data: {
@@ -44,39 +49,19 @@ interface LoginResponse {
   }
 }
 
+const { $api } = useNuxtApp()
+const { data, pending, execute } = useFetch<LoginResponse>('/auth/login', {
+  method: 'POST',
+  immediate: false, // 不立刻执行请求
+  server: false, // ssr 端不要执行
+  $fetch: $api,
+  body: formData
+})
 async function onSubmit(payload: FormSubmitEvent<Schema>) {
-  const res = await $fetch<LoginResponse>('http://localhost:3333/auth/login', {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: payload.data,
-    // 请求拦截器
-    onRequest: () => {
-      // 设置 token
-    },
-    // 响应拦截器
-    onResponse: (res) => {
-      // console.log('响应处理')
-      console.log('onResponse: ', res)
-      if (res.response.ok) {
-        console.log('操作成功')
-      }
-    },
-    onRequestError: () => {
-      console.log('请求发生错误')
-      toast.add({
-        title: '网络连接错误'
-      })
-    },
-    onResponseError: (err) => {
-      console.log('onResponseError', err)
-    }
-  })
-
-  // console.log(res.data)
-  // 如果是会话浏览器关掉之后就失效了
-  token.value = res.data.token.token
+  // 给响应式数据赋值
+  formData.value = payload.data
+  await execute()
+  token.value = data.value?.data.token.token
 }
 </script>
 
@@ -90,6 +75,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
         icon="i-lucide-user"
         :fields="fields"
         :submit="{ label: '登录', size: 'xl' }"
+        :loading="pending"
         @submit="onSubmit"
       >
         <template #footer>
