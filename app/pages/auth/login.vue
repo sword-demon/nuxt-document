@@ -3,6 +3,7 @@ import * as z from 'zod'
 import { ref } from 'vue'
 import type { AuthFormField } from '@nuxt/ui'
 import { useMutation } from '~/composables/useMutation'
+import type { AuthLoginPost200Response } from '~/types/models/auth-login-post200-response'
 
 const fields: AuthFormField[] = [
   {
@@ -42,12 +43,15 @@ const formData = ref<Schema>({
   password: ''
 })
 
-const { pending, onSubmit } = useMutation<any>('/auth/login', {
-  body: formData,
-  onSuccess(data) {
-    token.value = data.token.token
+const { pending, onSubmit } = useMutation<AuthLoginPost200Response>(
+  '/auth/login',
+  {
+    body: formData,
+    onSuccess(data) {
+      token.value = data.token.token
+    }
   }
-})
+)
 </script>
 
 <template>
