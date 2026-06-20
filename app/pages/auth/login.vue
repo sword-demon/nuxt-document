@@ -36,7 +36,8 @@ type Schema = z.output<typeof schema>
 
 // 新用户 7 天内登录一直有效
 // 响应式数据
-const token = useCookie('token', { maxAge: 60 * 60 * 24 * 7 })
+// const token = useCookie('token', { maxAge: 60 * 60 * 24 * 7 })
+const { login } = useAuth()
 
 const formData = ref<Schema>({
   name: '',
@@ -47,9 +48,8 @@ const { pending, onSubmit } = useMutation<AuthLoginPost200Response>(
   '/auth/login',
   {
     body: formData,
-    onSuccess(data) {
-      token.value = data.token.token
-    }
+    // 成功之后调用函数即可
+    onSuccess: login
   }
 )
 </script>
