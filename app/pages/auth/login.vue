@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import * as z from 'zod'
 import { ref } from 'vue'
-import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
+import type { AuthFormField } from '@nuxt/ui'
 import { useMutation } from '~/composables/useMutation'
 
 const fields: AuthFormField[] = [
@@ -42,24 +42,12 @@ const formData = ref<Schema>({
   password: ''
 })
 
-interface LoginResponse {
-  data: {
-    token: {
-      token: string
-    }
+const { pending, onSubmit } = useMutation<any>('/auth/login', {
+  body: formData,
+  onSuccess(data) {
+    token.value = data.token.token
   }
-}
-
-const { data, pending, execute } = useMutation<LoginResponse>('/auth/login', {
-  method: 'POST',
-  body: formData
 })
-async function onSubmit(payload: FormSubmitEvent<Schema>) {
-  // 给响应式数据赋值
-  formData.value = payload.data
-  await execute()
-  token.value = data.value?.data.token.token
-}
 </script>
 
 <template>
