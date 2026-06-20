@@ -170,3 +170,9 @@ pnpm dev
 ```bash
 pnpm next add plugin fetch
 ```
+
+## 自定义组合函数
+
+```bash
+pnpm nuxt add composable useMutation
+```

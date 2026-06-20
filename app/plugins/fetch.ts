@@ -1,5 +1,5 @@
 export default defineNuxtPlugin((_nuxtApp) => {
-  const toast = useToast()
+  // const toast = useToast()
   const $api = $fetch.create({
     baseURL: 'http://localhost:3333',
     headers: {
@@ -17,10 +17,10 @@ export default defineNuxtPlugin((_nuxtApp) => {
       }
     },
     onRequestError: () => {
-      console.log('请求发生错误')
-      toast.add({
-        title: '网络连接错误'
-      })
+      // console.log('请求发生错误')
+      // toast.add({
+      //   title: '网络连接错误'
+      // })
     },
     onResponseError: (err) => {
       console.log('onResponseError', err)

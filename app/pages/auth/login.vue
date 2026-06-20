@@ -2,6 +2,7 @@
 import * as z from 'zod'
 import { ref } from 'vue'
 import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
+import { useMutation } from '~/composables/useMutation'
 
 const fields: AuthFormField[] = [
   {
@@ -49,12 +50,8 @@ interface LoginResponse {
   }
 }
 
-const { $api } = useNuxtApp()
-const { data, pending, execute } = useFetch<LoginResponse>('/auth/login', {
+const { data, pending, execute } = useMutation<LoginResponse>('/auth/login', {
   method: 'POST',
-  immediate: false, // 不立刻执行请求
-  server: false, // ssr 端不要执行
-  $fetch: $api,
   body: formData
 })
 async function onSubmit(payload: FormSubmitEvent<Schema>) {
