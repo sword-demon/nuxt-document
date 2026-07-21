@@ -23,7 +23,7 @@ export default defineNuxtPlugin((_nuxtApp) => {
     onRequestError: () => {},
     onResponseError: ({ response }) => {
       switch (response.status) {
-        case 422:
+        case 422: {
           const errors = response._data?.errors as {
             field: string
             message: string
@@ -33,6 +33,7 @@ export default defineNuxtPlugin((_nuxtApp) => {
           })
           console.log('errors', errors)
           break
+        }
       }
     }
   })

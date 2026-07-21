@@ -4,9 +4,9 @@ const validateStore = useValidateStore()
 
 <template>
   <UAlert
+    v-if="Object.keys(validateStore.errors).length > 0"
     color="error"
     icon="i-lucide-info"
-    v-if="Object.keys(validateStore.errors).length > 0"
   >
     <template #description>
       <div
