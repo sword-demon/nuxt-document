@@ -38,7 +38,7 @@ const schema = z
     password: z.string('请输入注册密码').min(8, '密码不能少于 8 个字符'),
     password_confirm: z.string('请确认密码')
   })
-  .refine(data => data.password === data.password_confirm, {
+  .refine((data) => data.password === data.password_confirm, {
     message: '两次输入的密码不一致',
     path: ['password_confirm']
   })
@@ -64,7 +64,8 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
         icon="i-lucide-user"
         :fields="fields"
         :submit="{ label: '注册', size: 'xl' }"
-        @submit="onSubmit">
+        @submit="onSubmit"
+      >
         <template #footer>
           如果您已有账号，请先
           <ULink

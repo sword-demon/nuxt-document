@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import type { AuthFormField } from '@nuxt/ui'
 import { useMutation } from '~/composables/useMutation'
 import type { AuthLoginPost200Response } from '~/types/models/auth-login-post200-response'
+import ValidateMessage from '~/components/ValidateMessage.vue'
 
 const fields: AuthFormField[] = [
   {
@@ -81,6 +82,9 @@ const { pending, onSubmit } = useMutation<AuthLoginPost200Response>(
           >
             首页
           </ULink>
+        </template>
+        <template #validation>
+          <ValidateMessage />
         </template>
       </UAuthForm>
     </UPageCard>

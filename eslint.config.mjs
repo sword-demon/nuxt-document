@@ -10,6 +10,7 @@ export default withNuxt({
     'vue/singleline-html-element-content-newline': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-empty-object-type': 'off',
-    '@typescript-eslint/ban-ts-comment': 'off'
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@stylistic/arrow-parens': 'off'
   }
 })
